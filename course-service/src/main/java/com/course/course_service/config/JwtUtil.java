@@ -9,7 +9,7 @@ import java.util.*;
 
 @Component
 public class JwtUtil {
-    private final String SECRET = "mysecretkey123456";
+    private final String SECRET = "my-super-secret-key-12345678901234567890";
 
     public String extractUsername(String token) {
         return Jwts.parser().setSigningKey(SECRET.getBytes())
@@ -17,9 +17,12 @@ public class JwtUtil {
     }
 
     public List<SimpleGrantedAuthority> extractRoles(String token) {
-        Claims claims = Jwts.parser().setSigningKey(SECRET.getBytes())
-                .parseClaimsJws(token).getBody();
-        String role = claims.get("roles").toString(); // stored as ROLE_ADMIN or ROLE_STAFF
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET.getBytes())
+                .parseClaimsJws(token)
+                .getBody();
+
+        String role = claims.get("role", String.class);
         return List.of(new SimpleGrantedAuthority(role));
     }
 

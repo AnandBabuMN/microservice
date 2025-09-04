@@ -8,23 +8,23 @@ spring:
     gateway:
       routes:
         - id: AUTH-SERVICE
-          uri: lb://auth-service
+          uri: http://localhost:8085
           predicates:
             - Path=/auth/**
         - id: STUDENT-SERVICE
-          uri: lb://student-service
+          uri: http://localhost:8081
           predicates:
             - Path=/student/**
         - id: COURSE-SERVICE
-          uri: lb://course-service
+          uri: http://localhost:8082
           predicates:
             - Path=/course/**
         - id: ENROLLMENT-SERVICE
-          uri: lb://enrollment-service
+          uri: http://localhost:8083
           predicates:
             - Path=/enrollment/**
         - id: ATTENDANCE-SERVICE
-          uri: lb://attendance-service
+          uri: http://localhost:8084
           predicates:
             - Path=/attendance/**
 

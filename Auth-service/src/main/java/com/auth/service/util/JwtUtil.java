@@ -15,14 +15,21 @@ public class JwtUtil {
     private final String secret = "my-super-secret-key-12345678901234567890";
 
     public String generateToken(UserDetails userDetails) {
+        String role = userDetails.getAuthorities()
+                .stream()
+                .findFirst()
+                .get()
+                .getAuthority();
+
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
-                .claim("roles", userDetails.getAuthorities())
+                .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .compact();
     }
+
 
     public String extractUsername(String token) {
         return Jwts.parser().setSigningKey(secret.getBytes())

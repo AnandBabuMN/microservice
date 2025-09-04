@@ -25,7 +25,7 @@ public class DataSeeder implements CommandLineRunner {
             admin.setPassword(passwordEncoder.encode("admin123"));
             admin.setRole(RoleEnum.ADMIN);
             userRepository.save(admin);
-            System.out.println("✅ Default Admin created: admin/admin123");
+            System.out.println("Default Admin created: admin/admin123");
         }
 
         if (userRepository.findByUsername("staff").isEmpty()) {
@@ -34,7 +34,7 @@ public class DataSeeder implements CommandLineRunner {
             staff.setPassword(passwordEncoder.encode("staff123"));
             staff.setRole(RoleEnum.STAFF);
             userRepository.save(staff);
-            System.out.println("✅ Default Staff created: staff/staff123");
+            System.out.println("Default Staff created: staff/staff123");
         }
     }
 }

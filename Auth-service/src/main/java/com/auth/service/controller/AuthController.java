@@ -20,8 +20,10 @@ public class AuthController {
     private AuthenticationManager authManager;
     @Autowired
     private JwtUtil jwtUtil;
-    @Autowired private UserRepository userRepository;
-    @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> req) {
@@ -34,7 +36,6 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("token", token));
     }
 
-    // Optional: API to create new users
     @PostMapping("/register")
     public String register(@RequestBody User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
